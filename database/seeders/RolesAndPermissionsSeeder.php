@@ -1,84 +1,49 @@
 <?php
-// database/seeders/PermissionSeeder.php
 
 namespace Database\Seeders;
 
-use App\Models\Permission;
 use App\Models\Role;
 use App\Authorization\AuthorizationPermission;
 use App\Authorization\AuthorizationRole;
+use App\Models\RolePermission;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\Log;
 
 class RolesAndPermissionsSeeder extends Seeder
 {
     public function run(): void
     {
-        // Clear existing permissions
-        Permission::query()->delete();
+        // Clear existing data
+        RolePermission::query()->delete();
+        Role::query()->delete();
 
-        // Create permissions
-        foreach (AuthorizationPermission::all() as $permissionDef) {
-            Permission::create([
-                'name' => $permissionDef->name,
-                'description' => $permissionDef->description,
-                'action' => $permissionDef->action,
-                'resource' => $permissionDef->resource,
+        // Create roles
+        $roles = [
+            AuthorizationRole::ADMIN => 'Administrator role with all permissions',
+            AuthorizationRole::LIBRARIAN => 'Librarian role with library management permissions',
+            AuthorizationRole::AUTHOR => 'Author role with book creation and management permissions',
+            AuthorizationRole::MEMBER => 'Member role with basic library access',
+        ];
+
+        $roleModels = [];
+        foreach ($roles as $name => $description) {
+            $roleModels[$name] = Role::create([
+                'name' => $name,
+                'description' => $description,
             ]);
         }
 
-        // Create roles
-        $adminRole = Role::firstOrCreate([
-            'name' => AuthorizationRole::ADMIN,
-        ], [
-            'description' => 'Administrator role with all permissions'
-        ]);
+        // Assign permissions to roles
+        $this->assignPermissions($roleModels[AuthorizationRole::ADMIN], AuthorizationPermission::admin());
+        $this->assignPermissions($roleModels[AuthorizationRole::LIBRARIAN], AuthorizationPermission::librarian());
+        $this->assignPermissions($roleModels[AuthorizationRole::AUTHOR], AuthorizationPermission::author());
+        $this->assignPermissions($roleModels[AuthorizationRole::MEMBER], AuthorizationPermission::member());
+    }
 
-        $librarianRole = Role::firstOrCreate([
-            'name' => AuthorizationRole::LIBRARIAN,
-        ], [
-            'description' => 'Librarian role with library management permissions'
-        ]);
-
-        $authorRole = Role::firstOrCreate([
-            'name' => AuthorizationRole::AUTHOR,
-        ], [
-            'description' => 'Author role with book creation and management permissions'
-        ]);
-
-        $memberRole = Role::firstOrCreate([
-            'name' => AuthorizationRole::MEMBER,
-        ], [
-            'description' => 'Member role with basic library access'
-        ]);
-
-        // Assign permissions based on flags
-
-        // Admin gets all isRoot permissions
-        $adminPermissions = Permission::whereIn(
-            'name',
-            array_map(fn($p) => $p->name, AuthorizationPermission::admin())
-        )->pluck('id');
-        $adminRole->permissions()->sync($adminPermissions);
-
-        // Librarian gets all isLibrarian permissions
-        $librarianPermissions = Permission::whereIn(
-            'name',
-            array_map(fn($p) => $p->name, AuthorizationPermission::librarian())
-        )->pluck('id');
-        $librarianRole->permissions()->sync($librarianPermissions);
-
-        // Author gets all isAuthor permissions
-        $authorPermissions = Permission::whereIn(
-            'name',
-            array_map(fn($p) => $p->name, AuthorizationPermission::author())
-        )->pluck('id');
-        $authorRole->permissions()->sync($authorPermissions);
-
-        // Member gets all isMember permissions
-        $memberPermissions = Permission::whereIn(
-            'name',
-            array_map(fn($p) => $p->name, AuthorizationPermission::member())
-        )->pluck('id');
-        $memberRole->permissions()->sync($memberPermissions);
+    private function assignPermissions(Role $role, array $permissions): void
+    {
+        foreach ($permissions as $permission) {
+            $role->addPermission($permission->name, $permission->action, $permission->resource);
+        }
     }
 }

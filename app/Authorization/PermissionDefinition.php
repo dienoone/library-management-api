@@ -11,9 +11,9 @@ class PermissionDefinition
     public string $action,
     public string $resource,
     public bool $isRoot = true,
-    public bool $isLibrarian = false,
-    public bool $isMember = false,
-    public bool $isAuthor = false
+    public bool $isLibrarian = true,
+    public bool $isAuthor = false,
+    public bool $isMember = false
   ) {
     $this->name = AuthorizationPermission::nameFor($action, $resource);
   }

@@ -8,7 +8,7 @@ class AuthorizationResource
   public const USERS = 'Users';
   public const USER_ROLES = 'UserRoles';
   public const ROLES = 'Roles';
-  public const PERMISSIONS = 'Permissions';
+  public const ROLE_PERMISSIONS = 'RolePermissions';
 
   // Library Resources
   public const AUTHORS = 'Authors';
@@ -16,7 +16,6 @@ class AuthorizationResource
   public const MEMBERS = 'Members';
   public const BORROWINGS = 'Borrowings';
   public const CATEGORIES = 'Categories';
-  public const PUBLISHERS = 'Publishers';
 
 
   public static function all(): array
@@ -26,12 +25,12 @@ class AuthorizationResource
       self::USERS,
       self::USER_ROLES,
       self::ROLES,
+      self::ROLE_PERMISSIONS,
       self::AUTHORS,
       self::BOOKS,
       self::MEMBERS,
       self::BORROWINGS,
       self::CATEGORIES,
-      self::PUBLISHERS,
     ];
   }
 }
