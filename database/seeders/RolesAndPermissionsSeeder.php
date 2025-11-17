@@ -7,7 +7,6 @@ use App\Authorization\AuthorizationPermission;
 use App\Authorization\AuthorizationRole;
 use App\Models\RolePermission;
 use Illuminate\Database\Seeder;
-use Illuminate\Support\Facades\Log;
 
 class RolesAndPermissionsSeeder extends Seeder
 {
