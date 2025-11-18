@@ -5,6 +5,7 @@ use App\Http\Controllers\Api\AuthController;
 use App\Http\Controllers\Api\CategoryController;
 use App\Http\Controllers\Api\AuthorController;
 use App\Http\Controllers\Api\BookController;
+use App\Http\Controllers\Api\BookPurchaseController;
 
 /*
 |--------------------------------------------------------------------------
@@ -113,4 +114,28 @@ Route::middleware('auth:sanctum')->prefix('books')->group(function () {
     // Category associations
     Route::post('/{id}/categories', [BookController::class, 'attachCategories']);
     Route::delete('/{id}/categories', [BookController::class, 'detachCategories']);
+});
+
+/*
+|--------------------------------------------------------------------------
+| Book Purchase Routes
+|--------------------------------------------------------------------------
+*/
+
+Route::middleware('auth:sanctum')->prefix('book-purchases')->group(function () {
+    // Standard CRUD operations
+    Route::get('/', [BookPurchaseController::class, 'index']);
+    Route::post('/', [BookPurchaseController::class, 'store']);
+    Route::get('/all', [BookPurchaseController::class, 'all']);
+    Route::get('/{id}', [BookPurchaseController::class, 'show']);
+    Route::put('/{id}', [BookPurchaseController::class, 'update']);
+    Route::patch('/{id}', [BookPurchaseController::class, 'update']);
+    Route::delete('/{id}', [BookPurchaseController::class, 'destroy']);
+
+    // Additional custom routes
+    Route::get('/member/{memberId}', [BookPurchaseController::class, 'getMemberPurchases']);
+    Route::get('/book/{bookId}', [BookPurchaseController::class, 'getBookPurchases']);
+    Route::get('/stats/overall', [BookPurchaseController::class, 'getStats']);
+    Route::get('/stats/member/{memberId}', [BookPurchaseController::class, 'getMemberStats']);
+    Route::get('/stats/book/{bookId}', [BookPurchaseController::class, 'getBookStats']);
 });

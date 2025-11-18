@@ -1154,6 +1154,424 @@
                     "response": []
                 }
             ]
+        },
+        {
+            "name": "Book Purchases",
+            "description": "Book purchase endpoints (require authentication)",
+            "item": [
+                {
+                    "name": "Get Book Purchases (Paginated)",
+                    "request": {
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Accept",
+                                "value": "application/json"
+                            },
+                            {
+                                "key": "Authorization",
+                                "value": "Bearer {{access_token}}"
+                            }
+                        ],
+                        "url": {
+                            "raw": "{{base_url}}/book-purchases?member_id=1&book_id=1&start_date=2024-01-01&end_date=2024-12-31&min_amount=10&max_amount=100&order_by=purchase_date&order_direction=desc&with_book=true&with_member=true&per_page=10",
+                            "host": ["{{base_url}}"],
+                            "path": ["book-purchases"],
+                            "query": [
+                                {
+                                    "key": "member_id",
+                                    "value": "1"
+                                },
+                                {
+                                    "key": "book_id",
+                                    "value": "1"
+                                },
+                                {
+                                    "key": "start_date",
+                                    "value": "2024-01-01"
+                                },
+                                {
+                                    "key": "end_date",
+                                    "value": "2024-12-31"
+                                },
+                                {
+                                    "key": "min_amount",
+                                    "value": "10"
+                                },
+                                {
+                                    "key": "max_amount",
+                                    "value": "100"
+                                },
+                                {
+                                    "key": "order_by",
+                                    "value": "purchase_date"
+                                },
+                                {
+                                    "key": "order_direction",
+                                    "value": "desc"
+                                },
+                                {
+                                    "key": "with_book",
+                                    "value": "true"
+                                },
+                                {
+                                    "key": "with_member",
+                                    "value": "true"
+                                },
+                                {
+                                    "key": "per_page",
+                                    "value": "10"
+                                }
+                            ]
+                        }
+                    },
+                    "response": []
+                },
+                {
+                    "name": "Create Book Purchase",
+                    "request": {
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application/json"
+                            },
+                            {
+                                "key": "Authorization",
+                                "value": "Bearer {{access_token}}"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n  \"quantity\": 2,\n  \"total_amount\": 25.98,\n  \"purchase_date\": \"2024-01-15\",\n  \"book_id\": 1,\n  \"member_id\": 1\n}"
+                        },
+                        "url": {
+                            "raw": "{{base_url}}/book-purchases",
+                            "host": ["{{base_url}}"],
+                            "path": ["book-purchases"]
+                        }
+                    },
+                    "response": []
+                },
+                {
+                    "name": "Get All Book Purchases (No Pagination)",
+                    "request": {
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Accept",
+                                "value": "application/json"
+                            },
+                            {
+                                "key": "Authorization",
+                                "value": "Bearer {{access_token}}"
+                            }
+                        ],
+                        "url": {
+                            "raw": "{{base_url}}/book-purchases/all",
+                            "host": ["{{base_url}}"],
+                            "path": ["book-purchases", "all"]
+                        }
+                    },
+                    "response": []
+                },
+                {
+                    "name": "Get Book Purchase by ID",
+                    "request": {
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Accept",
+                                "value": "application/json"
+                            },
+                            {
+                                "key": "Authorization",
+                                "value": "Bearer {{access_token}}"
+                            }
+                        ],
+                        "url": {
+                            "raw": "{{base_url}}/book-purchases/1",
+                            "host": ["{{base_url}}"],
+                            "path": ["book-purchases", "1"]
+                        }
+                    },
+                    "response": []
+                },
+                {
+                    "name": "Update Book Purchase (PUT)",
+                    "request": {
+                        "method": "PUT",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application/json"
+                            },
+                            {
+                                "key": "Authorization",
+                                "value": "Bearer {{access_token}}"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n  \"quantity\": 3,\n  \"unit_price\": 12.99,\n  \"total_amount\": 38.97,\n  \"purchase_date\": \"2024-01-20\",\n  \"book_id\": 1,\n  \"member_id\": 1\n}"
+                        },
+                        "url": {
+                            "raw": "{{base_url}}/book-purchases/1",
+                            "host": ["{{base_url}}"],
+                            "path": ["book-purchases", "1"]
+                        }
+                    },
+                    "response": []
+                },
+                {
+                    "name": "Update Book Purchase (PATCH)",
+                    "request": {
+                        "method": "PATCH",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application/json"
+                            },
+                            {
+                                "key": "Authorization",
+                                "value": "Bearer {{access_token}}"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n  \"quantity\": 1,\n  \"purchase_date\": \"2024-01-25\"\n}"
+                        },
+                        "url": {
+                            "raw": "{{base_url}}/book-purchases/1",
+                            "host": ["{{base_url}}"],
+                            "path": ["book-purchases", "1"]
+                        }
+                    },
+                    "response": []
+                },
+                {
+                    "name": "Delete Book Purchase",
+                    "request": {
+                        "method": "DELETE",
+                        "header": [
+                            {
+                                "key": "Accept",
+                                "value": "application/json"
+                            },
+                            {
+                                "key": "Authorization",
+                                "value": "Bearer {{access_token}}"
+                            }
+                        ],
+                        "url": {
+                            "raw": "{{base_url}}/book-purchases/1",
+                            "host": ["{{base_url}}"],
+                            "path": ["book-purchases", "1"]
+                        }
+                    },
+                    "response": []
+                },
+                {
+                    "name": "Get Member Purchases",
+                    "request": {
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Accept",
+                                "value": "application/json"
+                            },
+                            {
+                                "key": "Authorization",
+                                "value": "Bearer {{access_token}}"
+                            }
+                        ],
+                        "url": {
+                            "raw": "{{base_url}}/book-purchases/member/1?start_date=2024-01-01&end_date=2024-12-31&order_by=purchase_date&order_direction=desc&per_page=10",
+                            "host": ["{{base_url}}"],
+                            "path": ["book-purchases", "member", "1"],
+                            "query": [
+                                {
+                                    "key": "start_date",
+                                    "value": "2024-01-01"
+                                },
+                                {
+                                    "key": "end_date",
+                                    "value": "2024-12-31"
+                                },
+                                {
+                                    "key": "order_by",
+                                    "value": "purchase_date"
+                                },
+                                {
+                                    "key": "order_direction",
+                                    "value": "desc"
+                                },
+                                {
+                                    "key": "per_page",
+                                    "value": "10"
+                                }
+                            ]
+                        }
+                    },
+                    "response": []
+                },
+                {
+                    "name": "Get Book Purchases",
+                    "request": {
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Accept",
+                                "value": "application/json"
+                            },
+                            {
+                                "key": "Authorization",
+                                "value": "Bearer {{access_token}}"
+                            }
+                        ],
+                        "url": {
+                            "raw": "{{base_url}}/book-purchases/book/1?start_date=2024-01-01&end_date=2024-12-31&order_by=purchase_date&order_direction=desc&per_page=10",
+                            "host": ["{{base_url}}"],
+                            "path": ["book-purchases", "book", "1"],
+                            "query": [
+                                {
+                                    "key": "start_date",
+                                    "value": "2024-01-01"
+                                },
+                                {
+                                    "key": "end_date",
+                                    "value": "2024-12-31"
+                                },
+                                {
+                                    "key": "order_by",
+                                    "value": "purchase_date"
+                                },
+                                {
+                                    "key": "order_direction",
+                                    "value": "desc"
+                                },
+                                {
+                                    "key": "per_page",
+                                    "value": "10"
+                                }
+                            ]
+                        }
+                    },
+                    "response": []
+                },
+                {
+                    "name": "Get Overall Purchase Stats",
+                    "request": {
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Accept",
+                                "value": "application/json"
+                            },
+                            {
+                                "key": "Authorization",
+                                "value": "Bearer {{access_token}}"
+                            }
+                        ],
+                        "url": {
+                            "raw": "{{base_url}}/book-purchases/stats/overall?start_date=2024-01-01&end_date=2024-12-31&book_id=1",
+                            "host": ["{{base_url}}"],
+                            "path": ["book-purchases", "stats", "overall"],
+                            "query": [
+                                {
+                                    "key": "start_date",
+                                    "value": "2024-01-01"
+                                },
+                                {
+                                    "key": "end_date",
+                                    "value": "2024-12-31"
+                                },
+                                {
+                                    "key": "book_id",
+                                    "value": "1"
+                                }
+                            ]
+                        }
+                    },
+                    "response": []
+                },
+                {
+                    "name": "Get Member Purchase Stats",
+                    "request": {
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Accept",
+                                "value": "application/json"
+                            },
+                            {
+                                "key": "Authorization",
+                                "value": "Bearer {{access_token}}"
+                            }
+                        ],
+                        "url": {
+                            "raw": "{{base_url}}/book-purchases/stats/member/1?start_date=2024-01-01&end_date=2024-12-31",
+                            "host": ["{{base_url}}"],
+                            "path": ["book-purchases", "stats", "member", "1"],
+                            "query": [
+                                {
+                                    "key": "start_date",
+                                    "value": "2024-01-01"
+                                },
+                                {
+                                    "key": "end_date",
+                                    "value": "2024-12-31"
+                                }
+                            ]
+                        }
+                    },
+                    "response": []
+                },
+                {
+                    "name": "Get Book Purchase Stats",
+                    "request": {
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Accept",
+                                "value": "application/json"
+                            },
+                            {
+                                "key": "Authorization",
+                                "value": "Bearer {{access_token}}"
+                            }
+                        ],
+                        "url": {
+                            "raw": "{{base_url}}/book-purchases/stats/book/1?start_date=2024-01-01&end_date=2024-12-31",
+                            "host": ["{{base_url}}"],
+                            "path": ["book-purchases", "stats", "book", "1"],
+                            "query": [
+                                {
+                                    "key": "start_date",
+                                    "value": "2024-01-01"
+                                },
+                                {
+                                    "key": "end_date",
+                                    "value": "2024-12-31"
+                                }
+                            ]
+                        }
+                    },
+                    "response": []
+                }
+            ]
         }
     ]
 }
