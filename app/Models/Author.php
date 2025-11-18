@@ -16,8 +16,10 @@ class Author extends Model
         'nationality',
     ];
 
-    protected $casts = [
-        'birth_date' => 'date',
+    protected $withCount = [
+        'books' => function ($q) {
+            return $q->where('status', 'active');
+        }
     ];
 
     public function books(): BelongsToMany

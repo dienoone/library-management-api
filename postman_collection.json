@@ -450,6 +450,260 @@
                     "response": []
                 }
             ]
+        },
+        {
+            "name": "Authors - Public",
+            "description": "Public author endpoints (no authentication required)",
+            "item": [
+                {
+                    "name": "Get Authors (Paginated)",
+                    "request": {
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Accept",
+                                "value": "application/json"
+                            }
+                        ],
+                        "url": {
+                            "raw": "{{base_url}}/authors?search=john&order_by=first_name&order_direction=asc&per_page=10&with_books=true",
+                            "host": ["{{base_url}}"],
+                            "path": ["authors"],
+                            "query": [
+                                {
+                                    "key": "search",
+                                    "value": "john"
+                                },
+                                {
+                                    "key": "order_by",
+                                    "value": "first_name"
+                                },
+                                {
+                                    "key": "order_direction",
+                                    "value": "asc"
+                                },
+                                {
+                                    "key": "per_page",
+                                    "value": "10"
+                                },
+                                {
+                                    "key": "with_books",
+                                    "value": "true"
+                                }
+                            ]
+                        }
+                    },
+                    "response": []
+                },
+                {
+                    "name": "Get Author by ID",
+                    "request": {
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Accept",
+                                "value": "application/json"
+                            }
+                        ],
+                        "url": {
+                            "raw": "{{base_url}}/authors/1",
+                            "host": ["{{base_url}}"],
+                            "path": ["authors", "1"]
+                        }
+                    },
+                    "response": []
+                },
+                {
+                    "name": "Get All Authors (No Pagination)",
+                    "request": {
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Accept",
+                                "value": "application/json"
+                            }
+                        ],
+                        "url": {
+                            "raw": "{{base_url}}/authors/all",
+                            "host": ["{{base_url}}"],
+                            "path": ["authors", "all"]
+                        }
+                    },
+                    "response": []
+                },
+                {
+                    "name": "Search Authors",
+                    "request": {
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Accept",
+                                "value": "application/json"
+                            }
+                        ],
+                        "url": {
+                            "raw": "{{base_url}}/authors/search?q=stephen",
+                            "host": ["{{base_url}}"],
+                            "path": ["authors", "search"],
+                            "query": [
+                                {
+                                    "key": "q",
+                                    "value": "stephen"
+                                }
+                            ]
+                        }
+                    },
+                    "response": []
+                }
+            ]
+        },
+        {
+            "name": "Authors - Protected",
+            "description": "Protected author endpoints (require authentication)",
+            "item": [
+                {
+                    "name": "Update Author (PUT)",
+                    "request": {
+                        "method": "PUT",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application/json"
+                            },
+                            {
+                                "key": "Authorization",
+                                "value": "Bearer {{access_token}}"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n  \"first_name\": \"Updated First Name\",\n  \"last_name\": \"Updated Last Name\",\n  \"phone\": \"+1234567899\",\n  \"address\": \"456 Updated Author Street\",\n  \"birth_date\": \"1980-01-01\",\n  \"bio\": \"Updated bio information\",\n  \"nationality\": \"Canadian\"\n}"
+                        },
+                        "url": {
+                            "raw": "{{base_url}}/authors/1",
+                            "host": ["{{base_url}}"],
+                            "path": ["authors", "1"]
+                        }
+                    },
+                    "response": []
+                },
+                {
+                    "name": "Update Author (PATCH)",
+                    "request": {
+                        "method": "PATCH",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application/json"
+                            },
+                            {
+                                "key": "Authorization",
+                                "value": "Bearer {{access_token}}"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n  \"bio\": \"Only updating the bio information\"\n}"
+                        },
+                        "url": {
+                            "raw": "{{base_url}}/authors/1",
+                            "host": ["{{base_url}}"],
+                            "path": ["authors", "1"]
+                        }
+                    },
+                    "response": []
+                },
+                {
+                    "name": "Delete Author",
+                    "request": {
+                        "method": "DELETE",
+                        "header": [
+                            {
+                                "key": "Accept",
+                                "value": "application/json"
+                            },
+                            {
+                                "key": "Authorization",
+                                "value": "Bearer {{access_token}}"
+                            }
+                        ],
+                        "url": {
+                            "raw": "{{base_url}}/authors/1",
+                            "host": ["{{base_url}}"],
+                            "path": ["authors", "1"]
+                        }
+                    },
+                    "response": []
+                },
+                {
+                    "name": "Attach Books to Author",
+                    "request": {
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application/json"
+                            },
+                            {
+                                "key": "Authorization",
+                                "value": "Bearer {{access_token}}"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n  \"book_ids\": [1, 2, 3]\n}"
+                        },
+                        "url": {
+                            "raw": "{{base_url}}/authors/1/books",
+                            "host": ["{{base_url}}"],
+                            "path": ["authors", "1", "books"]
+                        }
+                    },
+                    "response": []
+                },
+                {
+                    "name": "Detach Books from Author",
+                    "request": {
+                        "method": "DELETE",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application/json"
+                            },
+                            {
+                                "key": "Authorization",
+                                "value": "Bearer {{access_token}}"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n  \"book_ids\": [1, 2]\n}"
+                        },
+                        "url": {
+                            "raw": "{{base_url}}/authors/1/books",
+                            "host": ["{{base_url}}"],
+                            "path": ["authors", "1", "books"]
+                        }
+                    },
+                    "response": []
+                }
+            ]
         }
     ]
 }
