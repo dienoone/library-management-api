@@ -7,6 +7,7 @@ use App\Http\Controllers\Api\AuthorController;
 use App\Http\Controllers\Api\BookController;
 use App\Http\Controllers\Api\BookPurchaseController;
 use App\Http\Controllers\Api\BorrowingController;
+use App\Http\Controllers\Api\LibrarianController;
 
 /*
 |--------------------------------------------------------------------------
@@ -178,4 +179,24 @@ Route::middleware('auth:sanctum')->prefix('borrowings')->group(function () {
 // User-specific borrowing routes
 Route::middleware('auth:sanctum')->group(function () {
     Route::get('/my-borrowings', [BorrowingController::class, 'myBorrowings']);
+});
+
+/*
+|--------------------------------------------------------------------------
+| Librarian Routes
+|--------------------------------------------------------------------------
+*/
+
+Route::prefix('librarians')->group(function () {
+    Route::get('/', [LibrarianController::class, 'index']);
+    Route::get('/all', [LibrarianController::class, 'all']);
+    Route::get('/search', [LibrarianController::class, 'search']);
+    Route::get('/{id}', [LibrarianController::class, 'show']);
+});
+
+Route::middleware('auth:sanctum')->prefix('librarians')->group(function () {
+    // Standard CRUD operations
+    Route::put('/{id}', [LibrarianController::class, 'update']);
+    Route::patch('/{id}', [LibrarianController::class, 'update']);
+    Route::delete('/{id}', [LibrarianController::class, 'destroy']);
 });

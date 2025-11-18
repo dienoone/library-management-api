@@ -2100,6 +2100,200 @@
                     "response": []
                 }
             ]
+        },
+        {
+            "name": "Librarians - Public",
+            "description": "Public librarian endpoints (no authentication required)",
+            "item": [
+                {
+                    "name": "Get Librarians (Paginated)",
+                    "request": {
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Accept",
+                                "value": "application/json"
+                            }
+                        ],
+                        "url": {
+                            "raw": "{{base_url}}/librarians?search=john&order_by=first_name&order_direction=asc&per_page=10&with_user=true",
+                            "host": ["{{base_url}}"],
+                            "path": ["librarians"],
+                            "query": [
+                                {
+                                    "key": "search",
+                                    "value": "john"
+                                },
+                                {
+                                    "key": "order_by",
+                                    "value": "first_name"
+                                },
+                                {
+                                    "key": "order_direction",
+                                    "value": "asc"
+                                },
+                                {
+                                    "key": "per_page",
+                                    "value": "10"
+                                },
+                                {
+                                    "key": "with_user",
+                                    "value": "true"
+                                }
+                            ]
+                        }
+                    },
+                    "response": []
+                },
+                {
+                    "name": "Get Librarian by ID",
+                    "request": {
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Accept",
+                                "value": "application/json"
+                            }
+                        ],
+                        "url": {
+                            "raw": "{{base_url}}/librarians/1",
+                            "host": ["{{base_url}}"],
+                            "path": ["librarians", "1"]
+                        }
+                    },
+                    "response": []
+                },
+                {
+                    "name": "Get All Librarians (No Pagination)",
+                    "request": {
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Accept",
+                                "value": "application/json"
+                            }
+                        ],
+                        "url": {
+                            "raw": "{{base_url}}/librarians/all",
+                            "host": ["{{base_url}}"],
+                            "path": ["librarians", "all"]
+                        }
+                    },
+                    "response": []
+                },
+                {
+                    "name": "Search Librarians",
+                    "request": {
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Accept",
+                                "value": "application/json"
+                            }
+                        ],
+                        "url": {
+                            "raw": "{{base_url}}/librarians/search?q=smith",
+                            "host": ["{{base_url}}"],
+                            "path": ["librarians", "search"],
+                            "query": [
+                                {
+                                    "key": "q",
+                                    "value": "smith"
+                                }
+                            ]
+                        }
+                    },
+                    "response": []
+                }
+            ]
+        },
+        {
+            "name": "Librarians - Protected",
+            "description": "Protected librarian endpoints (require authentication)",
+            "item": [
+                {
+                    "name": "Update Librarian (PUT)",
+                    "request": {
+                        "method": "PUT",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application/json"
+                            },
+                            {
+                                "key": "Authorization",
+                                "value": "Bearer {{access_token}}"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n  \"first_name\": \"Updated First Name\",\n  \"last_name\": \"Updated Last Name\",\n  \"email\": \"updated.librarian@example.com\",\n  \"phone\": \"+1234567899\",\n  \"address\": \"456 Updated Library Street\",\n  \"birth_date\": \"1985-05-15\",\n  \"hire_date\": \"2020-06-01\"\n}"
+                        },
+                        "url": {
+                            "raw": "{{base_url}}/librarians/1",
+                            "host": ["{{base_url}}"],
+                            "path": ["librarians", "1"]
+                        }
+                    },
+                    "response": []
+                },
+                {
+                    "name": "Update Librarian (PATCH)",
+                    "request": {
+                        "method": "PATCH",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application/json"
+                            },
+                            {
+                                "key": "Authorization",
+                                "value": "Bearer {{access_token}}"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n  \"phone\": \"+1234567890\",\n  \"hire_date\": \"2021-01-15\"\n}"
+                        },
+                        "url": {
+                            "raw": "{{base_url}}/librarians/1",
+                            "host": ["{{base_url}}"],
+                            "path": ["librarians", "1"]
+                        }
+                    },
+                    "response": []
+                },
+                {
+                    "name": "Delete Librarian",
+                    "request": {
+                        "method": "DELETE",
+                        "header": [
+                            {
+                                "key": "Accept",
+                                "value": "application/json"
+                            },
+                            {
+                                "key": "Authorization",
+                                "value": "Bearer {{access_token}}"
+                            }
+                        ],
+                        "url": {
+                            "raw": "{{base_url}}/librarians/1",
+                            "host": ["{{base_url}}"],
+                            "path": ["librarians", "1"]
+                        }
+                    },
+                    "response": []
+                }
+            ]
         }
     ]
 }
