@@ -8,8 +8,6 @@ use Illuminate\Database\Eloquent\Relations\MorphOne;
 
 trait HasUser
 {
-    protected $with = ['user'];
-
     public function user(): MorphOne
     {
         return $this->morphOne(User::class, 'userable');

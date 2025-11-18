@@ -16,12 +16,6 @@ class Author extends Model
         'nationality',
     ];
 
-    protected $withCount = [
-        'books' => function ($q) {
-            return $q->where('status', 'active');
-        }
-    ];
-
     public function books(): BelongsToMany
     {
         return $this->belongsToMany(Book::class, 'author_book');
