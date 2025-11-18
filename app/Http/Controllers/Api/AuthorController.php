@@ -111,7 +111,7 @@ class AuthorController extends Controller
 
         return $this->success(
             new AuthorResource($author),
-            'Books attached to $author successfully'
+            'Books attached to author successfully'
         );
     }
 
@@ -127,7 +127,7 @@ class AuthorController extends Controller
 
         return $this->success(
             new AuthorResource($author),
-            'Books detached from category successfully'
+            'Books detached from author successfully'
         );
     }
 }

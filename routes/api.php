@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\AuthController;
 use App\Http\Controllers\Api\CategoryController;
 use App\Http\Controllers\Api\AuthorController;
+use App\Http\Controllers\Api\BookController;
 
 /*
 |--------------------------------------------------------------------------
@@ -77,4 +78,39 @@ Route::middleware('auth:sanctum')->prefix('authors')->group(function () {
     // Book associations
     Route::post('/{id}/books', [AuthorController::class, 'attachBooks']);
     Route::delete('/{id}/books', [AuthorController::class, 'detachBooks']);
+});
+
+/*
+|--------------------------------------------------------------------------
+| Book Routes
+|--------------------------------------------------------------------------
+*/
+
+Route::prefix('books')->group(function () {
+    // Public routes
+    Route::get('/', [BookController::class, 'index']);
+    Route::get('/all', [BookController::class, 'all']);
+    Route::get('/search', [BookController::class, 'search']);
+    Route::get('/available', [BookController::class, 'available']);
+    Route::get('/for-purchase', [BookController::class, 'forPurchase']);
+    Route::get('/{id}', [BookController::class, 'show']);
+});
+
+Route::middleware('auth:sanctum')->prefix('books')->group(function () {
+    // Standard CRUD operations
+    Route::post('/', [BookController::class, 'store']);
+    Route::put('/{id}', [BookController::class, 'update']);
+    Route::patch('/{id}', [BookController::class, 'update']);
+    Route::delete('/{id}', [BookController::class, 'destroy']);
+
+    // Book copies management
+    Route::patch('/{id}/copies', [BookController::class, 'updateCopies']);
+
+    // Author associations
+    Route::post('/{id}/authors', [BookController::class, 'attachAuthors']);
+    Route::delete('/{id}/authors', [BookController::class, 'detachAuthors']);
+
+    // Category associations
+    Route::post('/{id}/categories', [BookController::class, 'attachCategories']);
+    Route::delete('/{id}/categories', [BookController::class, 'detachCategories']);
 });
