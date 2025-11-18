@@ -2592,6 +2592,473 @@
                     "response": []
                 }
             ]
+        },
+        {
+            "name": "Roles",
+            "description": "Role management endpoints (require authentication)",
+            "item": [
+                {
+                    "name": "Get Roles (Paginated)",
+                    "request": {
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Accept",
+                                "value": "application/json"
+                            },
+                            {
+                                "key": "Authorization",
+                                "value": "Bearer {{access_token}}"
+                            }
+                        ],
+                        "url": {
+                            "raw": "{{base_url}}/roles?search=admin&permission=create&action=create&resource=books&order_by=name&order_direction=asc&with_permissions=true&with_users=true&per_page=10",
+                            "host": ["{{base_url}}"],
+                            "path": ["roles"],
+                            "query": [
+                                {
+                                    "key": "search",
+                                    "value": "admin"
+                                },
+                                {
+                                    "key": "permission",
+                                    "value": "create"
+                                },
+                                {
+                                    "key": "action",
+                                    "value": "create"
+                                },
+                                {
+                                    "key": "resource",
+                                    "value": "books"
+                                },
+                                {
+                                    "key": "order_by",
+                                    "value": "name"
+                                },
+                                {
+                                    "key": "order_direction",
+                                    "value": "asc"
+                                },
+                                {
+                                    "key": "with_permissions",
+                                    "value": "true"
+                                },
+                                {
+                                    "key": "with_users",
+                                    "value": "true"
+                                },
+                                {
+                                    "key": "per_page",
+                                    "value": "10"
+                                }
+                            ]
+                        }
+                    },
+                    "response": []
+                },
+                {
+                    "name": "Create Role",
+                    "request": {
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application/json"
+                            },
+                            {
+                                "key": "Authorization",
+                                "value": "Bearer {{access_token}}"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n  \"name\": \"Content Manager\",\n  \"description\": \"Can manage books and categories\",\n  \"permissions\": [\n    {\n      \"name\": \"create_books\",\n      \"action\": \"create\",\n      \"resource\": \"books\"\n    },\n    {\n      \"name\": \"update_books\",\n      \"action\": \"update\",\n      \"resource\": \"books\"\n    },\n    {\n      \"name\": \"view_categories\",\n      \"action\": \"view\",\n      \"resource\": \"categories\"\n    }\n  ]\n}"
+                        },
+                        "url": {
+                            "raw": "{{base_url}}/roles",
+                            "host": ["{{base_url}}"],
+                            "path": ["roles"]
+                        }
+                    },
+                    "response": []
+                },
+                {
+                    "name": "Get Role by ID",
+                    "request": {
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Accept",
+                                "value": "application/json"
+                            },
+                            {
+                                "key": "Authorization",
+                                "value": "Bearer {{access_token}}"
+                            }
+                        ],
+                        "url": {
+                            "raw": "{{base_url}}/roles/1",
+                            "host": ["{{base_url}}"],
+                            "path": ["roles", "1"]
+                        }
+                    },
+                    "response": []
+                },
+                {
+                    "name": "Update Role (PUT)",
+                    "request": {
+                        "method": "PUT",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application/json"
+                            },
+                            {
+                                "key": "Authorization",
+                                "value": "Bearer {{access_token}}"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n  \"name\": \"Updated Role Name\",\n  \"description\": \"Updated role description\",\n  \"permissions\": [\n    {\n      \"name\": \"manage_all\",\n      \"action\": \"manage\",\n      \"resource\": \"all\"\n    }\n  ]\n}"
+                        },
+                        "url": {
+                            "raw": "{{base_url}}/roles/1",
+                            "host": ["{{base_url}}"],
+                            "path": ["roles", "1"]
+                        }
+                    },
+                    "response": []
+                },
+                {
+                    "name": "Update Role (PATCH)",
+                    "request": {
+                        "method": "PATCH",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application/json"
+                            },
+                            {
+                                "key": "Authorization",
+                                "value": "Bearer {{access_token}}"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n  \"description\": \"Only updating description\"\n}"
+                        },
+                        "url": {
+                            "raw": "{{base_url}}/roles/1",
+                            "host": ["{{base_url}}"],
+                            "path": ["roles", "1"]
+                        }
+                    },
+                    "response": []
+                },
+                {
+                    "name": "Delete Role",
+                    "request": {
+                        "method": "DELETE",
+                        "header": [
+                            {
+                                "key": "Accept",
+                                "value": "application/json"
+                            },
+                            {
+                                "key": "Authorization",
+                                "value": "Bearer {{access_token}}"
+                            }
+                        ],
+                        "url": {
+                            "raw": "{{base_url}}/roles/1",
+                            "host": ["{{base_url}}"],
+                            "path": ["roles", "1"]
+                        }
+                    },
+                    "response": []
+                },
+                {
+                    "name": "Get All Roles (No Pagination)",
+                    "request": {
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Accept",
+                                "value": "application/json"
+                            },
+                            {
+                                "key": "Authorization",
+                                "value": "Bearer {{access_token}}"
+                            }
+                        ],
+                        "url": {
+                            "raw": "{{base_url}}/roles/all",
+                            "host": ["{{base_url}}"],
+                            "path": ["roles", "all"]
+                        }
+                    },
+                    "response": []
+                },
+                {
+                    "name": "Add Permission to Role",
+                    "request": {
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application/json"
+                            },
+                            {
+                                "key": "Authorization",
+                                "value": "Bearer {{access_token}}"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n  \"name\": \"delete_books\",\n  \"action\": \"delete\",\n  \"resource\": \"books\"\n}"
+                        },
+                        "url": {
+                            "raw": "{{base_url}}/roles/1/permissions",
+                            "host": ["{{base_url}}"],
+                            "path": ["roles", "1", "permissions"]
+                        }
+                    },
+                    "response": []
+                },
+                {
+                    "name": "Remove Permission from Role",
+                    "request": {
+                        "method": "DELETE",
+                        "header": [
+                            {
+                                "key": "Accept",
+                                "value": "application/json"
+                            },
+                            {
+                                "key": "Authorization",
+                                "value": "Bearer {{access_token}}"
+                            }
+                        ],
+                        "url": {
+                            "raw": "{{base_url}}/roles/1/permissions/1",
+                            "host": ["{{base_url}}"],
+                            "path": ["roles", "1", "permissions", "1"]
+                        }
+                    },
+                    "response": []
+                },
+                {
+                    "name": "Sync Permissions for Role",
+                    "request": {
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application/json"
+                            },
+                            {
+                                "key": "Authorization",
+                                "value": "Bearer {{access_token}}"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n  \"permissions\": [\n    {\n      \"name\": \"view_books\",\n      \"action\": \"view\",\n      \"resource\": \"books\"\n    },\n    {\n      \"name\": \"create_books\",\n      \"action\": \"create\",\n      \"resource\": \"books\"\n    },\n    {\n      \"name\": \"update_books\",\n      \"action\": \"update\",\n      \"resource\": \"books\"\n    }\n  ]\n}"
+                        },
+                        "url": {
+                            "raw": "{{base_url}}/roles/1/permissions/sync",
+                            "host": ["{{base_url}}"],
+                            "path": ["roles", "1", "permissions", "sync"]
+                        }
+                    },
+                    "response": []
+                },
+                {
+                    "name": "Check Role Has Permission",
+                    "request": {
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Accept",
+                                "value": "application/json"
+                            },
+                            {
+                                "key": "Authorization",
+                                "value": "Bearer {{access_token}}"
+                            }
+                        ],
+                        "url": {
+                            "raw": "{{base_url}}/roles/1/has-permission/create_books",
+                            "host": ["{{base_url}}"],
+                            "path": [
+                                "roles",
+                                "1",
+                                "has-permission",
+                                "create_books"
+                            ]
+                        }
+                    },
+                    "response": []
+                },
+                {
+                    "name": "Check Role Has Permission by Action",
+                    "request": {
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Accept",
+                                "value": "application/json"
+                            },
+                            {
+                                "key": "Authorization",
+                                "value": "Bearer {{access_token}}"
+                            }
+                        ],
+                        "url": {
+                            "raw": "{{base_url}}/roles/1/has-permission-by-action?action=create&resource=books",
+                            "host": ["{{base_url}}"],
+                            "path": ["roles", "1", "has-permission-by-action"],
+                            "query": [
+                                {
+                                    "key": "action",
+                                    "value": "create"
+                                },
+                                {
+                                    "key": "resource",
+                                    "value": "books"
+                                }
+                            ]
+                        }
+                    },
+                    "response": []
+                },
+                {
+                    "name": "Get Role Permission Names",
+                    "request": {
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Accept",
+                                "value": "application/json"
+                            },
+                            {
+                                "key": "Authorization",
+                                "value": "Bearer {{access_token}}"
+                            }
+                        ],
+                        "url": {
+                            "raw": "{{base_url}}/roles/1/permission-names",
+                            "host": ["{{base_url}}"],
+                            "path": ["roles", "1", "permission-names"]
+                        }
+                    },
+                    "response": []
+                },
+                {
+                    "name": "Assign Users to Role",
+                    "request": {
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application/json"
+                            },
+                            {
+                                "key": "Authorization",
+                                "value": "Bearer {{access_token}}"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n  \"user_ids\": [1, 2, 3]\n}"
+                        },
+                        "url": {
+                            "raw": "{{base_url}}/roles/1/users",
+                            "host": ["{{base_url}}"],
+                            "path": ["roles", "1", "users"]
+                        }
+                    },
+                    "response": []
+                },
+                {
+                    "name": "Remove Users from Role",
+                    "request": {
+                        "method": "DELETE",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application/json"
+                            },
+                            {
+                                "key": "Authorization",
+                                "value": "Bearer {{access_token}}"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n  \"user_ids\": [1, 2]\n}"
+                        },
+                        "url": {
+                            "raw": "{{base_url}}/roles/1/users",
+                            "host": ["{{base_url}}"],
+                            "path": ["roles", "1", "users"]
+                        }
+                    },
+                    "response": []
+                },
+                {
+                    "name": "Get Role Users",
+                    "request": {
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Accept",
+                                "value": "application/json"
+                            },
+                            {
+                                "key": "Authorization",
+                                "value": "Bearer {{access_token}}"
+                            }
+                        ],
+                        "url": {
+                            "raw": "{{base_url}}/roles/1/users",
+                            "host": ["{{base_url}}"],
+                            "path": ["roles", "1", "users"]
+                        }
+                    },
+                    "response": []
+                }
+            ]
         }
     ]
 }

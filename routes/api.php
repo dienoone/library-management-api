@@ -9,6 +9,7 @@ use App\Http\Controllers\Api\BookPurchaseController;
 use App\Http\Controllers\Api\BorrowingController;
 use App\Http\Controllers\Api\LibrarianController;
 use App\Http\Controllers\Api\MemberController;
+use App\Http\Controllers\Api\RoleController;
 
 /*
 |--------------------------------------------------------------------------
@@ -226,4 +227,38 @@ Route::middleware('auth:sanctum')->prefix('members')->group(function () {
 
     // Status management
     Route::patch('/{id}/status', [MemberController::class, 'updateStatus']);
+});
+
+/*
+|--------------------------------------------------------------------------
+| Role Routes
+|--------------------------------------------------------------------------
+*/
+
+Route::prefix('roles')->group(function () {
+    // Public routes
+    Route::get('/', [RoleController::class, 'index']);
+    Route::get('/all', [RoleController::class, 'all']);
+    Route::get('/{id}', [RoleController::class, 'show']);
+    Route::get('/{id}/has-permission/{permissionName}', [RoleController::class, 'hasPermission']);
+    Route::get('/{id}/has-permission-by-action', [RoleController::class, 'hasPermissionByAction']);
+    Route::get('/{id}/permission-names', [RoleController::class, 'getPermissionNames']);
+    Route::get('/{id}/users', [RoleController::class, 'getUsers']);
+});
+
+Route::middleware('auth:sanctum')->prefix('roles')->group(function () {
+    // Standard CRUD operations
+    Route::post('/', [RoleController::class, 'store']);
+    Route::put('/{id}', [RoleController::class, 'update']);
+    Route::patch('/{id}', [RoleController::class, 'update']);
+    Route::delete('/{id}', [RoleController::class, 'destroy']);
+
+    // Permission management
+    Route::post('/{id}/permissions', [RoleController::class, 'addPermission']);
+    Route::delete('/{id}/permissions/{permissionId}', [RoleController::class, 'removePermission']);
+    Route::post('/{id}/permissions/sync', [RoleController::class, 'syncPermissions']);
+
+    // User management
+    Route::post('/{id}/users', [RoleController::class, 'assignUsers']);
+    Route::delete('/{id}/users', [RoleController::class, 'removeUsers']);
 });
