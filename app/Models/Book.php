@@ -75,4 +75,20 @@ class Book extends Model
 
         return asset('storage/' . $this->cover_image);
     }
+
+    //? decrease available copies when borrowed
+    public function borrow()
+    {
+        if ($this->available_copies > 0) {
+            $this->decrement('available_copies');
+        }
+    }
+
+    //? increase available copies when returned
+    public function returnBook()
+    {
+        if ($this->available_copies < $this->total_copies) {
+            $this->increment('available_copies');
+        }
+    }
 }

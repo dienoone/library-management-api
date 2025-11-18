@@ -1572,6 +1572,534 @@
                     "response": []
                 }
             ]
+        },
+        {
+            "name": "Borrowings - Public",
+            "description": "Public borrowing endpoints",
+            "item": [
+                {
+                    "name": "Search Borrowings",
+                    "request": {
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Accept",
+                                "value": "application/json"
+                            }
+                        ],
+                        "url": {
+                            "raw": "{{base_url}}/borrowings/search?q=harry&per_page=10",
+                            "host": ["{{base_url}}"],
+                            "path": ["borrowings", "search"],
+                            "query": [
+                                {
+                                    "key": "q",
+                                    "value": "harry"
+                                },
+                                {
+                                    "key": "per_page",
+                                    "value": "10"
+                                }
+                            ]
+                        }
+                    },
+                    "response": []
+                }
+            ]
+        },
+        {
+            "name": "Borrowings - Protected",
+            "description": "Protected borrowing endpoints (require authentication)",
+            "item": [
+                {
+                    "name": "Get Borrowings (Paginated)",
+                    "request": {
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Accept",
+                                "value": "application/json"
+                            },
+                            {
+                                "key": "Authorization",
+                                "value": "Bearer {{access_token}}"
+                            }
+                        ],
+                        "url": {
+                            "raw": "{{base_url}}/borrowings?search=potter&status=borrowed&member_id=1&book_id=1&overdue=true&borrow_date_from=2024-01-01&borrow_date_to=2024-12-31&due_date_from=2024-01-01&due_date_to=2024-12-31&order_by=borrow_date&order_direction=desc&with_book=true&with_member=true&per_page=10",
+                            "host": ["{{base_url}}"],
+                            "path": ["borrowings"],
+                            "query": [
+                                {
+                                    "key": "search",
+                                    "value": "potter"
+                                },
+                                {
+                                    "key": "status",
+                                    "value": "borrowed"
+                                },
+                                {
+                                    "key": "member_id",
+                                    "value": "1"
+                                },
+                                {
+                                    "key": "book_id",
+                                    "value": "1"
+                                },
+                                {
+                                    "key": "overdue",
+                                    "value": "true"
+                                },
+                                {
+                                    "key": "borrow_date_from",
+                                    "value": "2024-01-01"
+                                },
+                                {
+                                    "key": "borrow_date_to",
+                                    "value": "2024-12-31"
+                                },
+                                {
+                                    "key": "due_date_from",
+                                    "value": "2024-01-01"
+                                },
+                                {
+                                    "key": "due_date_to",
+                                    "value": "2024-12-31"
+                                },
+                                {
+                                    "key": "order_by",
+                                    "value": "borrow_date"
+                                },
+                                {
+                                    "key": "order_direction",
+                                    "value": "desc"
+                                },
+                                {
+                                    "key": "with_book",
+                                    "value": "true"
+                                },
+                                {
+                                    "key": "with_member",
+                                    "value": "true"
+                                },
+                                {
+                                    "key": "per_page",
+                                    "value": "10"
+                                }
+                            ]
+                        }
+                    },
+                    "response": []
+                },
+                {
+                    "name": "Create Borrowing",
+                    "request": {
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application/json"
+                            },
+                            {
+                                "key": "Authorization",
+                                "value": "Bearer {{access_token}}"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n  \"book_id\": 1,\n  \"member_id\": 1,\n  \"borrow_date\": \"2024-01-15\",\n  \"due_date\": \"2024-01-29\",\n  \"notes\": \"Regular borrowing\"\n}"
+                        },
+                        "url": {
+                            "raw": "{{base_url}}/borrowings",
+                            "host": ["{{base_url}}"],
+                            "path": ["borrowings"]
+                        }
+                    },
+                    "response": []
+                },
+                {
+                    "name": "Get All Borrowings (No Pagination)",
+                    "request": {
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Accept",
+                                "value": "application/json"
+                            },
+                            {
+                                "key": "Authorization",
+                                "value": "Bearer {{access_token}}"
+                            }
+                        ],
+                        "url": {
+                            "raw": "{{base_url}}/borrowings/all",
+                            "host": ["{{base_url}}"],
+                            "path": ["borrowings", "all"]
+                        }
+                    },
+                    "response": []
+                },
+                {
+                    "name": "Get Borrowing by ID",
+                    "request": {
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Accept",
+                                "value": "application/json"
+                            },
+                            {
+                                "key": "Authorization",
+                                "value": "Bearer {{access_token}}"
+                            }
+                        ],
+                        "url": {
+                            "raw": "{{base_url}}/borrowings/1",
+                            "host": ["{{base_url}}"],
+                            "path": ["borrowings", "1"]
+                        }
+                    },
+                    "response": []
+                },
+                {
+                    "name": "Update Borrowing (PUT)",
+                    "request": {
+                        "method": "PUT",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application/json"
+                            },
+                            {
+                                "key": "Authorization",
+                                "value": "Bearer {{access_token}}"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n  \"borrow_date\": \"2024-01-16\",\n  \"due_date\": \"2024-01-30\",\n  \"return_date\": null,\n  \"status\": \"borrowed\",\n  \"renewal_count\": 0,\n  \"notes\": \"Updated borrowing details\"\n}"
+                        },
+                        "url": {
+                            "raw": "{{base_url}}/borrowings/1",
+                            "host": ["{{base_url}}"],
+                            "path": ["borrowings", "1"]
+                        }
+                    },
+                    "response": []
+                },
+                {
+                    "name": "Update Borrowing (PATCH)",
+                    "request": {
+                        "method": "PATCH",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application/json"
+                            },
+                            {
+                                "key": "Authorization",
+                                "value": "Bearer {{access_token}}"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n  \"status\": \"returned\",\n  \"return_date\": \"2024-01-25\"\n}"
+                        },
+                        "url": {
+                            "raw": "{{base_url}}/borrowings/1",
+                            "host": ["{{base_url}}"],
+                            "path": ["borrowings", "1"]
+                        }
+                    },
+                    "response": []
+                },
+                {
+                    "name": "Delete Borrowing",
+                    "request": {
+                        "method": "DELETE",
+                        "header": [
+                            {
+                                "key": "Accept",
+                                "value": "application/json"
+                            },
+                            {
+                                "key": "Authorization",
+                                "value": "Bearer {{access_token}}"
+                            }
+                        ],
+                        "url": {
+                            "raw": "{{base_url}}/borrowings/1",
+                            "host": ["{{base_url}}"],
+                            "path": ["borrowings", "1"]
+                        }
+                    },
+                    "response": []
+                },
+                {
+                    "name": "Get Member Borrowings",
+                    "request": {
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Accept",
+                                "value": "application/json"
+                            },
+                            {
+                                "key": "Authorization",
+                                "value": "Bearer {{access_token}}"
+                            }
+                        ],
+                        "url": {
+                            "raw": "{{base_url}}/borrowings/member/1?status=borrowed&active=true&per_page=10",
+                            "host": ["{{base_url}}"],
+                            "path": ["borrowings", "member", "1"],
+                            "query": [
+                                {
+                                    "key": "status",
+                                    "value": "borrowed"
+                                },
+                                {
+                                    "key": "active",
+                                    "value": "true"
+                                },
+                                {
+                                    "key": "per_page",
+                                    "value": "10"
+                                }
+                            ]
+                        }
+                    },
+                    "response": []
+                },
+                {
+                    "name": "Get Book Borrowings",
+                    "request": {
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Accept",
+                                "value": "application/json"
+                            },
+                            {
+                                "key": "Authorization",
+                                "value": "Bearer {{access_token}}"
+                            }
+                        ],
+                        "url": {
+                            "raw": "{{base_url}}/borrowings/book/1?status=borrowed&per_page=10",
+                            "host": ["{{base_url}}"],
+                            "path": ["borrowings", "book", "1"],
+                            "query": [
+                                {
+                                    "key": "status",
+                                    "value": "borrowed"
+                                },
+                                {
+                                    "key": "per_page",
+                                    "value": "10"
+                                }
+                            ]
+                        }
+                    },
+                    "response": []
+                },
+                {
+                    "name": "Get Overdue Borrowings",
+                    "request": {
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Accept",
+                                "value": "application/json"
+                            },
+                            {
+                                "key": "Authorization",
+                                "value": "Bearer {{access_token}}"
+                            }
+                        ],
+                        "url": {
+                            "raw": "{{base_url}}/borrowings/overdue",
+                            "host": ["{{base_url}}"],
+                            "path": ["borrowings", "overdue"]
+                        }
+                    },
+                    "response": []
+                },
+                {
+                    "name": "Get Active Borrowings",
+                    "request": {
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Accept",
+                                "value": "application/json"
+                            },
+                            {
+                                "key": "Authorization",
+                                "value": "Bearer {{access_token}}"
+                            }
+                        ],
+                        "url": {
+                            "raw": "{{base_url}}/borrowings/active",
+                            "host": ["{{base_url}}"],
+                            "path": ["borrowings", "active"]
+                        }
+                    },
+                    "response": []
+                },
+                {
+                    "name": "Get Borrowing Statistics",
+                    "request": {
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Accept",
+                                "value": "application/json"
+                            },
+                            {
+                                "key": "Authorization",
+                                "value": "Bearer {{access_token}}"
+                            }
+                        ],
+                        "url": {
+                            "raw": "{{base_url}}/borrowings/statistics",
+                            "host": ["{{base_url}}"],
+                            "path": ["borrowings", "statistics"]
+                        }
+                    },
+                    "response": []
+                },
+                {
+                    "name": "Renew Borrowing",
+                    "request": {
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application/json"
+                            },
+                            {
+                                "key": "Authorization",
+                                "value": "Bearer {{access_token}}"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n  \"notes\": \"Requesting renewal\"\n}"
+                        },
+                        "url": {
+                            "raw": "{{base_url}}/borrowings/1/renew",
+                            "host": ["{{base_url}}"],
+                            "path": ["borrowings", "1", "renew"]
+                        }
+                    },
+                    "response": []
+                },
+                {
+                    "name": "Return Borrowing",
+                    "request": {
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application/json"
+                            },
+                            {
+                                "key": "Authorization",
+                                "value": "Bearer {{access_token}}"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n  \"return_date\": \"2024-01-25\",\n  \"notes\": \"Book returned in good condition\"\n}"
+                        },
+                        "url": {
+                            "raw": "{{base_url}}/borrowings/1/return",
+                            "host": ["{{base_url}}"],
+                            "path": ["borrowings", "1", "return"]
+                        }
+                    },
+                    "response": []
+                },
+                {
+                    "name": "Update Overdue Status",
+                    "request": {
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Accept",
+                                "value": "application/json"
+                            },
+                            {
+                                "key": "Authorization",
+                                "value": "Bearer {{access_token}}"
+                            }
+                        ],
+                        "url": {
+                            "raw": "{{base_url}}/borrowings/update-overdue-status",
+                            "host": ["{{base_url}}"],
+                            "path": ["borrowings", "update-overdue-status"]
+                        }
+                    },
+                    "response": []
+                },
+                {
+                    "name": "Get My Borrowings",
+                    "request": {
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Accept",
+                                "value": "application/json"
+                            },
+                            {
+                                "key": "Authorization",
+                                "value": "Bearer {{access_token}}"
+                            }
+                        ],
+                        "url": {
+                            "raw": "{{base_url}}/my-borrowings?status=borrowed&active=true&per_page=10",
+                            "host": ["{{base_url}}"],
+                            "path": ["my-borrowings"],
+                            "query": [
+                                {
+                                    "key": "status",
+                                    "value": "borrowed"
+                                },
+                                {
+                                    "key": "active",
+                                    "value": "true"
+                                },
+                                {
+                                    "key": "per_page",
+                                    "value": "10"
+                                }
+                            ]
+                        }
+                    },
+                    "response": []
+                }
+            ]
         }
     ]
 }

@@ -6,6 +6,7 @@ use App\Http\Controllers\Api\CategoryController;
 use App\Http\Controllers\Api\AuthorController;
 use App\Http\Controllers\Api\BookController;
 use App\Http\Controllers\Api\BookPurchaseController;
+use App\Http\Controllers\Api\BorrowingController;
 
 /*
 |--------------------------------------------------------------------------
@@ -138,4 +139,43 @@ Route::middleware('auth:sanctum')->prefix('book-purchases')->group(function () {
     Route::get('/stats/overall', [BookPurchaseController::class, 'getStats']);
     Route::get('/stats/member/{memberId}', [BookPurchaseController::class, 'getMemberStats']);
     Route::get('/stats/book/{bookId}', [BookPurchaseController::class, 'getBookStats']);
+});
+
+/*
+|--------------------------------------------------------------------------
+| Borrowing Routes
+|--------------------------------------------------------------------------
+*/
+
+Route::prefix('borrowings')->group(function () {
+    // Public routes - minimal public access if any
+    Route::get('/search', [BorrowingController::class, 'search']);
+});
+
+Route::middleware('auth:sanctum')->prefix('borrowings')->group(function () {
+    // Standard CRUD operations
+    Route::get('/', [BorrowingController::class, 'index']);
+    Route::post('/', [BorrowingController::class, 'store']);
+    Route::get('/all', [BorrowingController::class, 'all']);
+    Route::get('/{id}', [BorrowingController::class, 'show']);
+    Route::put('/{id}', [BorrowingController::class, 'update']);
+    Route::patch('/{id}', [BorrowingController::class, 'update']);
+    Route::delete('/{id}', [BorrowingController::class, 'destroy']);
+
+    // Additional custom routes
+    Route::get('/member/{memberId}', [BorrowingController::class, 'byMember']);
+    Route::get('/book/{bookId}', [BorrowingController::class, 'byBook']);
+    Route::get('/overdue', [BorrowingController::class, 'overdue']);
+    Route::get('/active', [BorrowingController::class, 'active']);
+    Route::get('/statistics', [BorrowingController::class, 'statistics']);
+
+    // Borrowing actions
+    Route::post('/{id}/renew', [BorrowingController::class, 'renew']);
+    Route::post('/{id}/return', [BorrowingController::class, 'return']);
+    Route::post('/update-overdue-status', [BorrowingController::class, 'updateOverdueStatus']);
+});
+
+// User-specific borrowing routes
+Route::middleware('auth:sanctum')->group(function () {
+    Route::get('/my-borrowings', [BorrowingController::class, 'myBorrowings']);
 });
