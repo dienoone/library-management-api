@@ -37,7 +37,7 @@ class AuthorizationPermission
       new PermissionDefinition('View Dashboard', AuthorizationAction::VIEW, AuthorizationResource::DASHBOARD),
 
       // Authors Management
-      new PermissionDefinition('View Authors', AuthorizationAction::VIEW, AuthorizationResource::AUTHORS,  isAuthor: true, isMember: true),
+      new PermissionDefinition('View Authors', AuthorizationAction::VIEW, AuthorizationResource::AUTHORS, isAuthor: true, isMember: true),
       new PermissionDefinition('Search Authors', AuthorizationAction::SEARCH, AuthorizationResource::AUTHORS, isAuthor: true),
       new PermissionDefinition('Create Authors', AuthorizationAction::CREATE, AuthorizationResource::AUTHORS),
       new PermissionDefinition('Update Authors', AuthorizationAction::UPDATE, AuthorizationResource::AUTHORS, isAuthor: true),
@@ -45,7 +45,7 @@ class AuthorizationPermission
       new PermissionDefinition('Export Authors', AuthorizationAction::EXPORT, AuthorizationResource::AUTHORS),
 
       // Books Management
-      new PermissionDefinition('View Books', AuthorizationAction::VIEW, AuthorizationResource::BOOKS,  isAuthor: true, isMember: true),
+      new PermissionDefinition('View Books', AuthorizationAction::VIEW, AuthorizationResource::BOOKS, isAuthor: true, isMember: true),
       new PermissionDefinition('Search Books', AuthorizationAction::SEARCH, AuthorizationResource::BOOKS, isAuthor: true, isMember: true),
       new PermissionDefinition('Create Books', AuthorizationAction::CREATE, AuthorizationResource::BOOKS, isAuthor: true),
       new PermissionDefinition('Update Books', AuthorizationAction::UPDATE, AuthorizationResource::BOOKS, isAuthor: true),
@@ -61,7 +61,7 @@ class AuthorizationPermission
       new PermissionDefinition('Export Members', AuthorizationAction::EXPORT, AuthorizationResource::MEMBERS),
 
       // Borrowings Management
-      new PermissionDefinition('View Borrowings', AuthorizationAction::VIEW, AuthorizationResource::BORROWINGS),
+      new PermissionDefinition('View Borrowings', AuthorizationAction::VIEW, AuthorizationResource::BORROWINGS, isMember: true),
       new PermissionDefinition('Search Borrowings', AuthorizationAction::SEARCH, AuthorizationResource::BORROWINGS),
       new PermissionDefinition('Create Borrowings', AuthorizationAction::CREATE, AuthorizationResource::BORROWINGS, isMember: true),
       new PermissionDefinition('Update Borrowings', AuthorizationAction::UPDATE, AuthorizationResource::BORROWINGS, isMember: true),
@@ -70,7 +70,7 @@ class AuthorizationPermission
 
       // Categories Management
       new PermissionDefinition('View Categories', AuthorizationAction::VIEW, AuthorizationResource::CATEGORIES, isAuthor: true, isMember: true),
-      new PermissionDefinition('Search Categories', AuthorizationAction::SEARCH, AuthorizationResource::CATEGORIES,  isAuthor: true, isMember: true),
+      new PermissionDefinition('Search Categories', AuthorizationAction::SEARCH, AuthorizationResource::CATEGORIES, isAuthor: true, isMember: true),
       new PermissionDefinition('Create Categories', AuthorizationAction::CREATE, AuthorizationResource::CATEGORIES),
       new PermissionDefinition('Update Categories', AuthorizationAction::UPDATE, AuthorizationResource::CATEGORIES),
       new PermissionDefinition('Delete Categories', AuthorizationAction::DELETE, AuthorizationResource::CATEGORIES),

@@ -7,9 +7,11 @@ use App\Http\Controllers\Api\AuthorController;
 use App\Http\Controllers\Api\BookController;
 use App\Http\Controllers\Api\BookPurchaseController;
 use App\Http\Controllers\Api\BorrowingController;
+use App\Http\Controllers\Api\DashboardController;
 use App\Http\Controllers\Api\LibrarianController;
 use App\Http\Controllers\Api\MemberController;
 use App\Http\Controllers\Api\RoleController;
+use App\Http\Controllers\Api\UserController;
 
 /*
 |--------------------------------------------------------------------------
@@ -261,4 +263,41 @@ Route::middleware('auth:sanctum')->prefix('roles')->group(function () {
     // User management
     Route::post('/{id}/users', [RoleController::class, 'assignUsers']);
     Route::delete('/{id}/users', [RoleController::class, 'removeUsers']);
+});
+
+
+/*
+|--------------------------------------------------------------------------
+| Dashboard Routes (Admin & Librarian)
+|--------------------------------------------------------------------------
+*/
+
+Route::middleware('auth:sanctum')->prefix('dashboard')->group(function () {
+    // Dashboard statistics
+    Route::get('/statistics', [DashboardController::class, 'statistics']);
+    Route::get('/librarian-statistics', [DashboardController::class, 'librarianStatistics']);
+    Route::get('/overview', [DashboardController::class, 'overview']);
+});
+
+/*
+|--------------------------------------------------------------------------
+| User Management Routes (Admin Only)
+|--------------------------------------------------------------------------
+*/
+
+Route::middleware('auth:sanctum')->prefix('users')->group(function () {
+    // Standard CRUD operations
+    Route::get('/', [UserController::class, 'index']);
+    Route::get('/all', [UserController::class, 'all']);
+    Route::get('/search', [UserController::class, 'search']);
+    Route::get('/statistics', [UserController::class, 'statistics']);
+    Route::get('/me', [UserController::class, 'me']);
+    Route::get('/by-type/{type}', [UserController::class, 'byType']);
+    Route::get('/{id}', [UserController::class, 'show']);
+    Route::put('/{id}', [UserController::class, 'update']);
+    Route::patch('/{id}', [UserController::class, 'update']);
+    Route::delete('/{id}', [UserController::class, 'destroy']);
+
+    // Role management
+    Route::post('/{id}/roles', [UserController::class, 'assignRoles']);
 });
