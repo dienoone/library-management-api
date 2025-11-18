@@ -2294,6 +2294,304 @@
                     "response": []
                 }
             ]
+        },
+        {
+            "name": "Members - Public",
+            "description": "Public member endpoints",
+            "item": [
+                {
+                    "name": "Get Members (Paginated)",
+                    "request": {
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Accept",
+                                "value": "application/json"
+                            }
+                        ],
+                        "url": {
+                            "raw": "{{base_url}}/members?search=john&status=active&start_date=2024-01-01&end_date=2024-12-31&order_by=first_name&order_direction=asc&with_borrowings=true&with_purchases=true&with_user=true&per_page=10",
+                            "host": ["{{base_url}}"],
+                            "path": ["members"],
+                            "query": [
+                                {
+                                    "key": "search",
+                                    "value": "john"
+                                },
+                                {
+                                    "key": "status",
+                                    "value": "active"
+                                },
+                                {
+                                    "key": "start_date",
+                                    "value": "2024-01-01"
+                                },
+                                {
+                                    "key": "end_date",
+                                    "value": "2024-12-31"
+                                },
+                                {
+                                    "key": "order_by",
+                                    "value": "first_name"
+                                },
+                                {
+                                    "key": "order_direction",
+                                    "value": "asc"
+                                },
+                                {
+                                    "key": "with_borrowings",
+                                    "value": "true"
+                                },
+                                {
+                                    "key": "with_purchases",
+                                    "value": "true"
+                                },
+                                {
+                                    "key": "with_user",
+                                    "value": "true"
+                                },
+                                {
+                                    "key": "per_page",
+                                    "value": "10"
+                                }
+                            ]
+                        }
+                    },
+                    "response": []
+                },
+                {
+                    "name": "Get Member by ID",
+                    "request": {
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Accept",
+                                "value": "application/json"
+                            }
+                        ],
+                        "url": {
+                            "raw": "{{base_url}}/members/1",
+                            "host": ["{{base_url}}"],
+                            "path": ["members", "1"]
+                        }
+                    },
+                    "response": []
+                },
+                {
+                    "name": "Get All Members (No Pagination)",
+                    "request": {
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Accept",
+                                "value": "application/json"
+                            }
+                        ],
+                        "url": {
+                            "raw": "{{base_url}}/members/all",
+                            "host": ["{{base_url}}"],
+                            "path": ["members", "all"]
+                        }
+                    },
+                    "response": []
+                },
+                {
+                    "name": "Search Members",
+                    "request": {
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Accept",
+                                "value": "application/json"
+                            }
+                        ],
+                        "url": {
+                            "raw": "{{base_url}}/members/search?q=smith",
+                            "host": ["{{base_url}}"],
+                            "path": ["members", "search"],
+                            "query": [
+                                {
+                                    "key": "q",
+                                    "value": "smith"
+                                }
+                            ]
+                        }
+                    },
+                    "response": []
+                },
+                {
+                    "name": "Get Member Borrowings",
+                    "request": {
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Accept",
+                                "value": "application/json"
+                            }
+                        ],
+                        "url": {
+                            "raw": "{{base_url}}/members/1/borrowings",
+                            "host": ["{{base_url}}"],
+                            "path": ["members", "1", "borrowings"]
+                        }
+                    },
+                    "response": []
+                },
+                {
+                    "name": "Get Active Borrowings Count",
+                    "request": {
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Accept",
+                                "value": "application/json"
+                            }
+                        ],
+                        "url": {
+                            "raw": "{{base_url}}/members/1/active-borrowings-count",
+                            "host": ["{{base_url}}"],
+                            "path": ["members", "1", "active-borrowings-count"]
+                        }
+                    },
+                    "response": []
+                },
+                {
+                    "name": "Check if Member Can Borrow",
+                    "request": {
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Accept",
+                                "value": "application/json"
+                            }
+                        ],
+                        "url": {
+                            "raw": "{{base_url}}/members/1/can-borrow",
+                            "host": ["{{base_url}}"],
+                            "path": ["members", "1", "can-borrow"]
+                        }
+                    },
+                    "response": []
+                }
+            ]
+        },
+        {
+            "name": "Members - Protected",
+            "description": "Protected member endpoints (require authentication)",
+            "item": [
+                {
+                    "name": "Update Member (PUT)",
+                    "request": {
+                        "method": "PUT",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application/json"
+                            },
+                            {
+                                "key": "Authorization",
+                                "value": "Bearer {{access_token}}"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n  \"first_name\": \"Updated First Name\",\n  \"last_name\": \"Updated Last Name\",\n  \"phone\": \"+1234567899\",\n  \"address\": \"456 Updated Street\",\n  \"birth_date\": \"1990-01-01\",\n  \"membership_date\": \"2024-01-15\",\n  \"status\": \"active\",\n  \"max_borrow_limit\": 5\n}"
+                        },
+                        "url": {
+                            "raw": "{{base_url}}/members/1",
+                            "host": ["{{base_url}}"],
+                            "path": ["members", "1"]
+                        }
+                    },
+                    "response": []
+                },
+                {
+                    "name": "Update Member (PATCH)",
+                    "request": {
+                        "method": "PATCH",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application/json"
+                            },
+                            {
+                                "key": "Authorization",
+                                "value": "Bearer {{access_token}}"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n  \"status\": \"inactive\",\n  \"max_borrow_limit\": 3\n}"
+                        },
+                        "url": {
+                            "raw": "{{base_url}}/members/1",
+                            "host": ["{{base_url}}"],
+                            "path": ["members", "1"]
+                        }
+                    },
+                    "response": []
+                },
+                {
+                    "name": "Delete Member",
+                    "request": {
+                        "method": "DELETE",
+                        "header": [
+                            {
+                                "key": "Accept",
+                                "value": "application/json"
+                            },
+                            {
+                                "key": "Authorization",
+                                "value": "Bearer {{access_token}}"
+                            }
+                        ],
+                        "url": {
+                            "raw": "{{base_url}}/members/1",
+                            "host": ["{{base_url}}"],
+                            "path": ["members", "1"]
+                        }
+                    },
+                    "response": []
+                },
+                {
+                    "name": "Update Member Status",
+                    "request": {
+                        "method": "PATCH",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application/json"
+                            },
+                            {
+                                "key": "Authorization",
+                                "value": "Bearer {{access_token}}"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n  \"status\": \"suspended\"\n}"
+                        },
+                        "url": {
+                            "raw": "{{base_url}}/members/1/status",
+                            "host": ["{{base_url}}"],
+                            "path": ["members", "1", "status"]
+                        }
+                    },
+                    "response": []
+                }
+            ]
         }
     ]
 }

@@ -8,6 +8,7 @@ use App\Http\Controllers\Api\BookController;
 use App\Http\Controllers\Api\BookPurchaseController;
 use App\Http\Controllers\Api\BorrowingController;
 use App\Http\Controllers\Api\LibrarianController;
+use App\Http\Controllers\Api\MemberController;
 
 /*
 |--------------------------------------------------------------------------
@@ -199,4 +200,30 @@ Route::middleware('auth:sanctum')->prefix('librarians')->group(function () {
     Route::put('/{id}', [LibrarianController::class, 'update']);
     Route::patch('/{id}', [LibrarianController::class, 'update']);
     Route::delete('/{id}', [LibrarianController::class, 'destroy']);
+});
+
+/*
+|--------------------------------------------------------------------------
+| Member Routes
+|--------------------------------------------------------------------------
+*/
+
+Route::prefix('members')->group(function () {
+    Route::get('/', [MemberController::class, 'index']);
+    Route::get('/all', [MemberController::class, 'all']);
+    Route::get('/search', [MemberController::class, 'search']);
+    Route::get('/{id}', [MemberController::class, 'show']);
+    Route::get('/{id}/borrowings', [MemberController::class, 'getBorrowings']);
+    Route::get('/{id}/active-borrowings-count', [MemberController::class, 'getActiveBorrowingsCount']);
+    Route::get('/{id}/can-borrow', [MemberController::class, 'canBorrow']);
+});
+
+Route::middleware('auth:sanctum')->prefix('members')->group(function () {
+    // Standard CRUD operations
+    Route::put('/{id}', [MemberController::class, 'update']);
+    Route::patch('/{id}', [MemberController::class, 'update']);
+    Route::delete('/{id}', [MemberController::class, 'destroy']);
+
+    // Status management
+    Route::patch('/{id}/status', [MemberController::class, 'updateStatus']);
 });

@@ -16,21 +16,18 @@ class MemberResource extends JsonResource
     {
         return [
             'id' => $this->id,
-            'name' => $this->name,
-            'email' => $this->email,
-            'phone' => $this->phone,
-            'address' => $this->address,
             'membership_date' => $this->membership_date?->toDateString(),
-            'is_active' => $this->is_active,
-
-            // Only include borrowing count if loaded
-            'active_borrowings_count' => $this->when(
-                $this->relationLoaded('borrowings'),
-                function () {
-                    return $this->borrowings->where('status', 'borrowed')->count();
-                }
-            ),
-
+            'status' => $this->status,
+            'max_borrow_limit' => $this->max_borrow_limit,
+            'active_borrowings_count' => $this->whenLoaded('borrowings', function () {
+                return $this->getActiveBorrowingsCount();
+            }),
+            'can_borrow' => $this->whenLoaded('borrowings', function () {
+                return $this->canBorrow();
+            }),
+            'user' => new UserResource($this->whenLoaded('user')),
+            'borrowings' => BorrowingResource::collection($this->whenLoaded('borrowings')),
+            'purchases' => BookPurchaseResource::collection($this->whenLoaded('purchases')),
             'created_at' => $this->created_at?->toDateTimeString(),
             'updated_at' => $this->updated_at?->toDateTimeString(),
         ];
